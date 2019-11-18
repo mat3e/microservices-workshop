@@ -3,6 +3,7 @@ microservices
 cw*/odp
 !cw1/odp
 !cw2/odp
+!cw4/odp
 !cw*/odp/postman*.json
 
 HELP.md
