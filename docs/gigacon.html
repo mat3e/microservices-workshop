@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content="Presentation">
+    <meta name="keywords" content="presentation">
+    <meta name="author" content="mat3e">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/blood.css">
+    <link rel="stylesheet" href="css/idea.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <style>
+        #header-margin {
+            text-align: left;
+            border-left: solid .25em white;
+            line-height: .85;
+            padding-left: .25em;
+        }
+
+        #header-logo {
+            width: 375px;
+            height: 80px;
+            background-image: url('img/twitter.png');
+            background-size: contain;
+            top: -4em;
+            right: 0;
+            position: absolute;
+        }
+
+        #about-me {
+            padding: 1em;
+            background-color: rgba(255, 255, 255, .75);
+            list-style-type: none;
+            margin-left: 0;
+            float: left;
+        }
+
+        #about-me ul {
+            list-style-type: none;
+            float: left;
+            margin-left: 0;
+        }
+
+        #about-me a {
+            color: #a23;
+        }
+
+        #about-me a:hover {
+            color: #dd5566;
+        }
+
+        .slides section img.pure-img {
+            border: none;
+            box-shadow: none;
+            background: none;
+            margin: 0;
+        }
+
+        code[contenteditable="true"] {
+            border: 0;
+            outline: 0;
+        }
+
+        #perspective a {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 45%;
+            margin: 0 auto;
+        }
+
+        #perspective a img {
+            border: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .slides section pre {
+            margin-bottom: 0;
+        }
+
+        .slides section pre+button {
+            cursor: pointer;
+
+            font-size: .65em;
+            font-weight: 100;
+            -webkit-font-smoothing: antialiased;
+
+            color: white;
+            background: rgb(175, 30, 35);
+
+            padding: 0 3px 3px 3px;
+            border: transparent;
+            border-radius: 4px;
+
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slides section pre+button:disabled {
+            background-color: grey;
+        }
+
+        .slides section a .stripped-img {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section a .stripped-img:hover {
+            border: none;
+            margin: 0;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .slides section .comment {
+            margin-top: -20px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+
+        .reveal .slides section .fragment.replace {
+            transition: none;
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.fade-out.visible.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.replace {
+            display: none;
+        }
+
+        .reveal .slides section .fragment.fade-in.visible.replace {
+            display: inline-block;
+        }
+
+        .reveal .slides section .fragment.highlight-red.visible {
+            color: #dd5566;
+        }
+
+        #hook-here button {
+            padding: 1em;
+            border-radius: 0;
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .reveal .slides section td.long-text-cell {
+            font-size: .5em;
+            vertical-align: middle;
+        }
+
+        .reveal .slides section table.summary {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .reveal .slides section table.summary th {
+            text-align: center;
+        }
+
+        .reveal .slides section table.summary tbody td,
+        .reveal .slides section table.summary th {
+            width: 33%;
+        }
+
+        .reveal .slides section table.summary tbody td:first-child,
+        .reveal .slides section table.summary th:first-child {
+            width: 7%;
+            vertical-align: middle;
+            text-align: center
+        }
+
+        .reveal .slides section .fragment.no-highlight.visible {
+            color: #eee;
+        }
+
+        .reveal .slides section .fragment.no-highlight {
+            opacity: 1;
+            visibility: inherit;
+        }
+
+        .reveal .slides section .centered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reveal .slides section .monolith {
+            background-image: url('img/monolith-bg.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 640px;
+        }
+
+        .reveal .slides section .monolith td {
+            vertical-align: middle;
+            text-align: center;
+            border: none;
+            height: 200px;
+            font-size: .85em;
+        }
+    </style>
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-image>
+                <section data-background-image>
+                    <div id="header-margin">
+                        <h1 style="margin: 0; font-size: 2.25em">Architektura mikroserwisów</h1>
+                        <h2 style="font-size: 1.5em">REST, CQRS, NoSQL</h2>
+                    </div>
+                    <div id="header-logo"></div>
+                </section>
+                <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                    <ul id="about-me">
+                        <li>
+                            <ul style="padding: 0">
+                                <li>
+                                    <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                        <i class="fab fa-linkedin"
+                                            style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                        /mateusz-chrzonstowski
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/_mat3e_">
+                                        <i class="fab fa-twitter-square"
+                                            style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.reddit.com/user/_mat3e_">
+                                        <i class="fab fa-reddit-square"
+                                            style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                        /_mat3e_
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/mat3e/">
+                                        <i class="fab fa-github-square"
+                                            style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                        /mat3e
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                                <li class="fragment" style="line-height: .75">
+                                    <a style="font-size: .7em; font-weight: bold;"
+                                        href="https://mat3e.github.io/microservices-workshop/gigacon.html">
+                                        mat3e.github.io
+                                        <div style="padding-left: .5em;">
+                                            /microservices-workshop/gigacon</div>
+                                    </a>
+                                </li>
+                                <li style="line-height: 1">&nbsp;</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="fragment" style="padding: .1em; line-height: 1">
+                                <li>
+                                    <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                        <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://allegro.tech/about-us/">
+                                        <img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section data-background-image="img/meet.jpg" data-background-color="#fff"
+                    data-background-size="contain">
+                    <h2 style="margin-top: -3em">Poznajmy się</h2>
+                    <aside class="notes">
+                        <ul>
+                            <li>nazwiska</li>
+                            <li>kto w czym programował, doświadczenie z mikroserwisami</li>
+                            <li>oczekiwania do warsztatu</li>
+                            <li>ulubiony alkohol</li>
+                        </ul>
+                        Kto Java? Kto Spring? Kto zna dobrze Springa?
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2>Faza 1 - modularny monolit</h2>
+                    <ol>
+                        <li class="fragment" data-fragment-index="1"><span class="fragment highlight-red"
+                                data-fragment-index="5">Dobre praktyki w projektowaniu i implementacji REST API</span>
+                        </li>
+                        <li class="fragment" data-fragment-index="2">Techniki i frameworki pozwalające skalować systemy
+                            rozproszone</li>
+                        <li class="fragment" data-fragment-index="3">Przegląd baz danych NoSQL, zastosowanie i użycie w
+                            mikroserwisach</li>
+                        <li class="fragment" data-fragment-index="4">CQRS i Event Sourcing</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>Jak to monolit?</h2>
+                    <table class="monolith">
+                        <tbody>
+                            <tr>
+                                <td class="fragment" data-fragment-index="1">Monolit</td>
+                                <td class="fragment" data-fragment-index="4">Rozproszony monolit</td>
+                            </tr>
+                            <tr>
+                                <td class="fragment" data-fragment-index="3">Modularny monolit</td>
+                                <td class="fragment" data-fragment-index="2">Mikroserwisy</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h2>Rozgrzewka</h2>
+                    <div class="fragment">
+                        Uruchomić Mongo:
+                        <pre style="margin: 0; width: 100%">
+                        <code>docker run -d -p 27017-27019:27017-27019 --name microservices mongo</code>
+                        </pre>
+                    </div>
+                    <p class="fragment" style="font-size: .75em">Potem i tak się przyda</p>
+                </section>
+                <section>
+                    <h2>REST, serwisy?</h2>
+                    <img src="img/alone.gif" style="width: 50%" class="pure-img fragment">
+                </section>
+                <section data-background-image="img/system.gif" data-background-size="contain">
+                    <aside class="notes">Nawet niemodularny monolit będzie rozmawiał z innymi systemami -
+                        łączenie/logowanie się przez fejsa, wysłanie maila
+                    </aside>
+                </section>
+                <section data-background-image="img/http.png" data-background-size="contain">
+                    <aside class="notes">Codzienne użycie - wklepujemy coś i już śmigamy po HTTP</aside>
+                </section>
+                <section>
+                    <h2>HTTP - 1/2</h2>
+                    <ul>
+                        <li class="fragment">W internetach HTTP jest wszechobecne!</li>
+                        <li class="fragment">Najpopularniejszą metodą protokołu HTTP jest GET<span class="fragment">; są
+                                jeszcze inne (PUT, POST, DELETE, ...)</span>
+                        </li>
+                        <li class="fragment">Przeglądarka wysyła żądanie (request) HTTP GET pod adres, np.
+                            <i>google.pl</i>
+                        </li>
+                        <li class="fragment">W odpowiedzi (response) dostajemy jakiegoś tam HTML-a - naszą
+                            stronę</li>
+                        <li class="fragment">Strona dociąga kolejne rzeczy, kolejnymi requestami: obrazek, JS-a, JSON-a,
+                            XML-a, ...</li>
+                    </ul>
+                    <aside class="notes">
+                        HTTP - Hypertext Transfer Protocol; HTML - HyperText Markup Language
+                    </aside>
+                </section>
+                <section>
+                    <h2>HTTP - 2/2</h2>
+                    <ul>
+                        <li class="fragment">Mamy jakiś kod na serwerze, wystawiony po HTTP</li>
+                        <li class="fragment">Klienty odpytują naszą aplikację.
+                            <span class="fragment">Klienty?</span>
+                            <ul>
+                                <li class="fragment">Front-end w przeglądarce na kompie</li>
+                                <li class="fragment">Front-end w przeglądarka na smartfonie</li>
+                                <li class="fragment">Apka na smartfonie</li>
+                                <li class="fragment">Inne aplikacje serwerowe (mikroserwisy)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">Można tutaj narysować klient-server i jakieś parametery - req, resp</aside>
+                </section>
+                <section>
+                    <span class="fragment fade-out replace" data-fragment-index="1"><img src="img/evo/1.png"
+                            class="pure-img"></span>
+                    <span class="fragment fade-out replace" data-fragment-index="2">
+                        <img src="img/evo/2.png" class="pure-img fragment fade-in replace" data-fragment-index="1">
+                    </span>
+                    <span class="fragment fade-in replace" data-fragment-index="2"><img src="img/evo/3.png"
+                            class="pure-img"></span>
+                    <aside class="notes">
+                        Największy problem - brak dokumentacji, więc szukano rozwiązań (WADL, RAML,
+                        RSDL, swagger)
+                        <br>
+                        REST = architektura, a o HATEOAS też za chwilę
+                    </aside>
+                </section>
+                <section>
+                    <h2>REST</h2>
+                    <ul>
+                        <li class="fragment">REpresentational State Transfer</li>
+                        <li class="fragment">Zmiana stanu poprzez reprezentacje</li>
+                        <li class="fragment">Odwołujemy się do źródeł/zasobów/rzeczowników, np. host/api/customers</li>
+                        <li class="fragment">Deklaratywnie - taki stan chcemy osiągnąć
+                            <ul>
+                                <li class="fragment">Jak? Robota serwera</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Mocne wykorzystanie HTTP</li>
+                        <li class="fragment">Architektura - ogólne wytyczne</li>
+                    </ul>
+                    <aside class="notes">
+                        Wchodzimy w "mięcho", coś o zasadach, wytycznych; liczba mnoga i id na końcu adresu
+                    </aside>
+                </section>
+                <section>
+                    <h2>Główne metody</h2>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1"><code>GET</code> <span class="fragment"
+                                data-fragment-index="2">- dej mie to</span></li>
+                        <li class="fragment" data-fragment-index="3"><code>POST</code> <span class="fragment"
+                                data-fragment-index="4">- weź to</span></li>
+                        <li class="fragment" data-fragment-index="5"><code>PUT</code> <span class="fragment"
+                                data-fragment-index="7">- podmień to</span></li>
+                        <li class="fragment" data-fragment-index="6"><code>PATCH</code> <span class="fragment">-
+                                zaktualizuj
+                                to</span></li>
+                        <li class="fragment"><code>DELETE</code> <span class="fragment">- usuń to</span></li>
+                        <li class="fragment">OPTIONS, HEAD, TRACE</li>
+                    </ul>
+                    <aside class="notes">
+                        Która metoda ma body, która nie
+                        <br>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/TRACE">TRACE</a>
+                    </aside>
+                </section>
+                <section>
+                    <h2>CRUD</h2>
+                    <div>
+                        <img src="img/wiki.png" class="pure-img">
+                    </div>
+                    <ul>
+                        <li class="fragment">
+                            <a
+                                href="https://sekurak.pl/banalny-0-day-w-phpmyadminie-przy-pewnych-warunkach-atakujacy-moze-kasowac-cale-bazy-danych/">Usuwanie
+                                GET-em w phpMyAdmin</a>
+                        </li>
+                        <li class="fragment">
+                            <a href="https://medium.com/@sansyrox/hacking-tinders-premium-model-43f9f699d44">Lajkowanie
+                                GET-em na Tinderze</a>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        Nic nowego, jak chcemy kogoś obrazić w IT, to mówimy "piszesz tylko CRUD-y", ale wciąż tego nie
+                        ogarniają
+                    </aside>
+                </section>
+                <section>
+                    <h2 style="margin: 0">Rodzaje metod</h2>
+                    <ol>
+                        <li class="fragment">Bezpieczne = nie modyfikują źródeł; można prefetchować, cache'ować
+                            <ul>
+                                <li class="fragment">OPTIONS, GET, HEAD</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Idempotentne = zawsze ten sam wynik
+                            <ul>
+                                <li class="fragment"><code>a=4</code> vs. <code>a++</code></li>
+                                <li class="fragment">W teorii: OPTIONS, GET, HEAD, PUT, DELETE</li>
+                                <li class="fragment">W praktyce: PATCH - często, DELETE - różnie</li>
+                                <li class="fragment">POST - nigdy</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <a class="fragment" href="http://restcookbook.com/HTTP%20Methods/idempotency/">restcookbook</a>
+                </section>
+                <section>
+                    <h2>statusy odpowiedzi</h2>
+                    <table class="statuses">
+                        <tbody style="font-size: .85em">
+                            <tr>
+                                <td style="border-right: solid 1px">
+                                    <ul>
+                                        <li class="fragment"><a href="https://http.cat/100">100 Continue</a></li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li class="fragment"><a href="https://http.cat/200">200 OK</a></li>
+                                        <li class="fragment"><a href="https://http.cat/201">201 Created</a></li>
+                                        <li class="fragment"><a href="https://http.cat/204">204 No Content</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border-right: solid 1px">
+                                    <ul>
+                                        <li class="fragment"><a href="https://http.cat/301">301 Moved Permanently</a>
+                                        </li>
+                                        <li class="fragment"><a href="https://http.cat/302">302 Found</a></li>
+                                        <li class="fragment"><a href="https://http.cat/304">304 Not Modified</a></li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li class="fragment"><a href="https://http.cat/400">400 Bad Request</a></li>
+                                        <li class="fragment"><a href="https://http.cat/401">401 Unauthorized</a></li>
+                                        <li class="fragment"><a href="https://http.cat/404">404 Not Found</a></li>
+                                        <li class="fragment"><a href="https://http.cat/405">405 Method Not Allowed</a>
+                                        </li>
+                                        <li class="fragment"><a href="https://http.cat/418">418 I’m a teapot</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: center">
+                                    <ul>
+                                        <li class="fragment"><a href="https://http.cat/500">500 Internal Server
+                                                Error</a>
+                                        </li>
+                                        <li class="fragment"><a href="https://http.cat/503">503 Service Unavailable</a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <aside class="notes">
+                        http.cat
+                        <ul>
+                            <li>informacyjne</li>
+                            <li>powodzenia</li>
+                            <li>przekierowania</li>
+                            <li>błąd klienta</li>
+                            <li>błąd serwera</li>
+                            <li>302 - tymczasowo gdzie indziej</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <img src="img/ppap.gif">
+                    <div class="fragment">
+                        <a href="https://www.restapitutorial.com/lessons/httpmethods.html">REST API Tutorial</a>
+                    </div>
+                    <aside class="notes">
+                        Połączenie wiedzy o metodach i statusach; CRUD v2
+                        <br>
+                        Otworzyć i tutaj dyskusja - jak nie znamy listy dostępnych URL-i, to co zwracać
+                        dla collection/id? 404? Wtedy nie ma collection, czy zasobu id? PRAGMATYZM
+                        <br>
+                        204 - ok w PUT, jak wiemy, co zaktualizowane (założony stan osiągnięty)
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h2>Ćwiczenie</h2>
+                    <img src="img/structure/1.png" class="pure-img fragment fade-out replace" data-fragment-index="1">
+                    <img src="img/structure/2.png" class="pure-img fragment fade-in replace" data-fragment-index="1">
+                    <div class="fragment">
+                        https://root/api/?
+                    </div>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h2 style="font-size: 1.5em;">content negotiation</h2>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation">
+                        <img src="img/nego.png" style="padding: .5em; background-color: white;">
+                    </a>
+                </section>
+                <section>
+                    <h2>
+                        <span>query param</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment"><a
+                                href="https://duckduckgo.com/?q=mistrz">https://duckduckgo.com/?q=mistrz</a>
+                        </li>
+                        <li class="fragment">Dla metody GET jedyna szansa, żeby przesłać jakieś informacje (brak body)
+                        </li>
+                        <li class="fragment">Możliwe też dla innych metod (content negotiation)</li>
+                        <li class="fragment">?, &, %20</li>
+                    </ul>
+                    <div class="fragment" style="margin-top: 1em; width: 100%; overflow: scroll">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td><code>':'</code></td>
+                                    <td><code>'/'</code></td>
+                                    <td><code>'?'</code></td>
+                                    <td><code>'#'</code></td>
+                                    <td><code>'['</code></td>
+                                    <td><code>']'</code></td>
+                                    <td><code>'@'</code></td>
+                                    <td><code>'!'</code></td>
+                                    <td><code>'$'</code></td>
+                                    <td><code>'&amp;'</code></td>
+                                    <td><code>"'"</code></td>
+                                    <td><code>'('</code></td>
+                                    <td><code>')'</code></td>
+                                    <td><code>'*'</code></td>
+                                    <td><code>'+'</code></td>
+                                    <td><code>','</code></td>
+                                    <td><code>';'</code></td>
+                                    <td><code>'='</code></td>
+                                    <td><code>'%'</code></td>
+                                    <td><code>' '</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>%3A</code></td>
+                                    <td><code>%2F</code></td>
+                                    <td><code>%3F</code></td>
+                                    <td><code>%23</code></td>
+                                    <td><code>%5B</code></td>
+                                    <td><code>%5D</code></td>
+                                    <td><code>%40</code></td>
+                                    <td><code>%21</code></td>
+                                    <td><code>%24</code></td>
+                                    <td><code>%26</code></td>
+                                    <td><code>%27</code></td>
+                                    <td><code>%28</code></td>
+                                    <td><code>%29</code></td>
+                                    <td><code>%2A</code></td>
+                                    <td><code>%2B</code></td>
+                                    <td><code>%2C</code></td>
+                                    <td><code>%3B</code></td>
+                                    <td><code>%3D</code></td>
+                                    <td><code>%25</code></td>
+                                    <td><code>%20</code> or <code>+</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <section>
+                    <h2>
+                        <span>Nagłówki</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">Accept, Content-Type
+                            <ul>
+                                <li class="fragment" data-fragment-index="2">Typy MIME: application/json, text/plain,
+                                    text/html, text/html,
+                                    text/css
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment" data-fragment-index="3">Cookie</li>
+                        <li class="fragment" data-fragment-index="4">Authorization</li>
+                    </ul>
+                    <h2 class="fragment" data-fragment-index="5">
+                        <span>Ciało</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment" data-fragment-index="5">"Content-Type" opisuje, co jest w ciele</li>
+                        <li class="fragment">Ciało odpowiedzi dopasowane do nagłówka "Accept" zapytania</li>
+                    </ul>
+                </section>
+                <section>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td style="text-align: center; font-weight: bold; width: 50%">SOAP</td>
+                                <td style="text-align: center; font-weight: bold; width: 50%">REST</td>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: .75em;">
+                            <tr class="fragment">
+                                <td style="width: 50%">Jeden sposób wysyłki</td>
+                                <td style="width: 50%">Różne znaczenie metod HTTP</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Zachowania (czasowniki)</td>
+                                <td>Źródła/zasoby (rzeczowniki)</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Niejednoznaczność statusów: 404, 200 zamiast 201</td>
+                                <td>Statusy odpowiedzi łatwe w interpretacji</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Problemy np. z przekierowaniem</td>
+                                <td>Obsługa przekierowań</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Schemat, możliwość generowania kodu</td>
+                                <td>Brak</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>XML</td>
+                                <td>Różne formaty, głównie JSON</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Dojrzalszy, wiadomo, czego się spodziewać</td>
+                                <td>Dojrzalszy, jeśli chodzi o integrację z HTTP</td>
+                            </tr>
+                            <tr class="fragment">
+                                <td>Protokół</td>
+                                <td>Architektura</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h3>Nieustandaryzowane, warte wzmianki</h3>
+                    <ul>
+                        <li class="fragment">Wersjonowanie</li>
+                        <li class="fragment">Stronicowanie</li>
+                        <li class="fragment">Szukanie/filtrowanie</li>
+                        <li class="fragment">Stronicowanie</li>
+                        <li class="fragment"><span class="fragment highlight-red">Dokumentacja/schemat</span></li>
+                    </ul>
+                    <aside class="notes">
+                        Pomysły jak załatwiać te rzeczy? Query params?
+                        <br>
+                        wersje: path - od zawsze, query - domyślnie najnowsze, header, Accept header
+                        <br>
+                        Jakby był jakiś jednoznaczny sposób dokumentacji, to tam byśmy określali jak szukać itd.
+                        Powtarzam się, ale to jest największy ból
+                    </aside>
+                </section>
+                <section>
+                    <h2>Próby naprawy</h2>
+                    <ul>
+                        <li class="fragment" data-fragment-index="1">RAML</li>
+                        <li class="fragment" data-fragment-index="2">WADL</li>
+                        <li class="fragment" data-fragment-index="3">RSDL</li>
+                        <li class="fragment" data-fragment-index="4"><span class="fragment highlight-red"
+                                data-fragment-index="7">swagger</span></li>
+                        <li class="fragment" data-fragment-index="6"><span class="fragment highlight-red"
+                                data-fragment-index="7">HATEOAS</span></li>
+                    </ul>
+                    <br>
+                    <img src="img/swagger.png" class="pure-img fragment" data-fragment-index="4">
+                    <img src="img/swag.gif" class="pure-img fragment" data-fragment-index="5">
+                    <aside class="notes">
+                        <ul>
+                            <li>RAML – RESTful API Modeling Language bazuje na YAML-u</li>
+                            <li>
+                                WADL – Web Application Description Language is a machine-readable XML description of
+                                HTTP-based web services. WADL is the REST equivalent of SOAP's Web Services Description
+                                Language (WSDL), which can also be used to describe REST web services.
+                            </li>
+                            <li>
+                                RSDL – RESTful Service Description Language is a machine- and human-readable XML
+                                description of HTTP-based web applications (typically REST web services). Unlike WADL,
+                                it concentrates on describing URIs as stand-alone entry points in to the application
+                                which can be invoked in different ways, does not require traversing over URI components
+                                to figure out URI structure, and supports URI/Headers/body parameters overloads. This
+                                makes it human-readable and easily consumed by both humans and machines.
+                            </li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h2>HATEOAS</h2>
+                    <pre class="fragment">
+                        <code data-trim>
+                            <?xml version="1.0"?>
+                            <account>
+                                <number>12345</number>
+                                <balance currency="usd">100.00</balance>
+                                <link rel="deposit" href="/accounts/12345/deposit" />
+                                <link rel="withdraw" href="/accounts/12345/withdraw" /> 
+                                <link rel="transfer" href="/accounts/12345/transfer" />
+                                <link rel="close" href="/accounts/12345/close" />
+                            </account>                                
+                        </code>
+                    </pre>
+                    <a class="fragment" href="https://www.infoq.com/articles/webber-rest-workflow/">How to GET a Cup of
+                        Coffee</a>
+                    <aside class="notes">
+                        Często się widzi przykłady w XML-u; jednak hipermedia
+                        <br>
+                        Hypermedia as the Engine of Application State
+                    </aside>
+                </section>
+                <section>
+                    <h3>GraphQL - następny krok?</h3>
+                    <div style="display: flex;">
+                        <div style="width: 50%">
+                            Jak SOAP
+                            <hr>
+                            <ul>
+                                <li class="fragment">Jeden endpoint</li>
+                                <li class="fragment">Jedna metoda HTTP</li>
+                                <li class="fragment">Schemat</li>
+                            </ul>
+                        </div>
+                        <div style="width: 50%">
+                            Jak REST
+                            <hr>
+                            <ul>
+                                <li class="fragment">JSON w odpowiedzi</li>
+                                <li class="fragment">Zasoby a nie metody</li>
+                                <li class="fragment">Ograniczona lista zachowań
+                                    <ul>
+                                        <li>Command & Query</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>REST/HTTP a Java</h2>
+                    <ul>
+                        <li class="fragment">
+                            <a
+                                href="https://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServlet.html">HttpServlet</a>
+                            + Servlet Container (Tomcat, Jetty)
+                        </li>
+                        <li class="fragment">
+                            JAX-RS i <a href="https://eclipse-ee4j.github.io/jersey/">Jersey</a>
+                            <pre style="margin: 0; line-height: 1">
+                                <code data-trim class="java">
+                                    @Path("/myResource")
+                                    @Produces("text/plain")
+                                    public class SomeResource {
+                                        @GET
+                                        public String doGetAsPlainText() {
+                                            // ...
+                                        }
+                                    
+                                        @GET
+                                        @Produces("text/html")
+                                        public String doGetAsHtml() {
+                                            // ...
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                        </li>
+                        <li class="fragment">Spring</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Spring</h2>
+                    <ul>
+                        <li class="fragment">
+                            <code>@RestController</code>, <code>@ResponseBody</code>
+                        </li>
+                        <li class="fragment">
+                            <code>@RequestMapping</code>,
+                            <code>@PostMapping</code>,
+                            <code>@GetMapping</code>,
+                            <code>@PutMapping</code>,
+                            <code>@DeleteMapping</code>
+                        </li>
+                        <li class="fragment">
+                            <code>@PathVariable</code>,
+                            <code>@RequestBody</code>,
+                            <code>@RequestParam</code>,
+                        </li>
+                        <li class="fragment">
+                            <code>ResponseEntity</code>,
+                            <code>Resource</code>
+                        </li>
+                    </ul>
+                    <p>
+                        <a class="fragment" href="https://spring.io/guides/tutorials/bookmarks/">Building REST services
+                            with Spring</a>
+                        <br>
+                        <a class="fragment" href="https://spring.io/guides/gs/rest-service/">Building a RESTful Web
+                            Service</a>
+                    </p>
+                    <aside class="notes">
+                        O każdym opowiadać, może napisać przykładowy kod na tablicy. Magiczne wiązanie
+                        parametrów HttpServletRequest, obiekty z JSON-a itd.
+                        <br>
+                        Będzie jeszcze dużo w kodzie i potem ogólnie o Springu
+                    </aside>
+                </section>
+                <section>
+                    <h2>Druga strona medalu</h2>
+                    <ul>
+                        <li class="fragment">
+                            <a
+                                href="https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html">
+                                Natywny HttpClient (Java 11)
+                            </a>
+                        </li>
+                        <li class="fragment"><a href="https://square.github.io/okhttp/">OkHttp</a></li>
+                        <li class="fragment"><a href="https://square.github.io/retrofit/">Retrofit</a></li>
+                        <li class="fragment"><a href="https://github.com/OpenFeign/feign">Feign</a></li>
+                        <li class="fragment"><a
+                                href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html">RestTemplate</a>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <img src="img/wait2.gif" class="pure-img">
+                    <aside class="notes">
+                        Wyjaśnić kontekst zadania - co jest czym i jak się będzie zmieniać; taski to takie serce naszego
+                        produktu
+                        <br>
+                        Przegląd - jak wygląda modularny monolit, że odpalamy monolith, a reszta to tylko konfigi
+                        <br>
+                        Groovy - fancy testy // bug przy ich odpalaniu Mavenem - nie widać w raporcie tych, co mają
+                        @Unroll
+                    </aside>
+                </section>
+                <section style="font-size: .9em">
+                    <h2 style="margin: 0">Ćwiczenie 1</h2>
+                    <ol>
+                        <li class="fragment">Pobrać zaczętą i omówioną aplikację</li>
+                        <li class="fragment">Odpalić testy. Co przechodzi, a co wymaga poprawek?</li>
+                        <li class="fragment">Dopisać brakujące rzeczy w testach <code>Controllera</code></li>
+                        <li class="fragment">Zaimplementować, żeby testy przechodziły</li>
+                        <li class="fragment">Uruchomić Mongo, uruchomić aplikację (moduł <code>monolith</code>)</li>
+                        <li class="fragment">Przeklikać REST API:
+                            <ul>
+                                <li class="fragment">Stworzyć przykadowy task</li>
+                                <li class="fragment">Przeczytać taski w przeglądarce, przeczytać konkretny task</li>
+                                <li class="fragment">Zaktualizować opis taska</li>
+                                <li class="fragment">Dodać kolejny task, usunąć</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <aside class="notes">Jak ktoś nie wyrobi, to mogę przesłać rozwiązanie</aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h2>
+                        <span>HTTPS, HTTP/2?</span>
+                    </h2>
+                    <ul>
+                        <li class="fragment">HTTPS = szyfrowane połączenia</li>
+                        <li class="fragment">Certyfikaty wystawiane przez CA (Certificate Authorities), którym
+                            przeglądarki
+                            ufają</li>
+                    </ul>
+                    <div class="fragment">
+                        <img src="img/http2.png" class="pure-img" style="width: 35%">
+                    </div>
+                    <aside class="notes">
+                        http/2 - długie połączenie, protokół binarny, wiele odpowiedzi na raz (obrazek), priorytety
+                        <br>
+                        http/3 - Hypertext Transfer Protocol (HTTP) over QUIC. QUIC is a transport layer network
+                        protocol initially developed by Google where user space congestion control is used over the User
+                        Datagram Protocol (UDP)
+                    </aside>
+                </section>
+                <section>
+                    <h2>Powiązane, pomocne</h2>
+                    <ul>
+                        <li><a href="https://spring.io/guides/tutorials/bookmarks/">Building REST services with
+                                Spring</a></li>
+                        <li><a href="https://www.restapitutorial.com/lessons/httpmethods.html">Using HTTP Methods for
+                                RESTful Services</a></li>
+                        <li><a href="http://restcookbook.com/HTTP%20Methods/idempotency/">What are idempotent and/or
+                                safe methods?</a></li>
+                        <li><a href="https://http.cat/">HTTP Cats</a></li>
+                        <li><a href="https://github.com/akullpp/awesome-java#http-clients">Awesome Java - HTTP
+                                Clients</a></li>
+                        <li><a href="https://github.com/toddmotto/public-apis">Public APIs</a></li>
+                        <li><a href="https://youtu.be/sSLXUOaOmkk">Mateusz Chrzonstowski - OData w Javie</a></li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2>Faza 1 - modularny monolit</h2>
+                    <ol>
+                        <li>Dobre praktyki w projektowaniu i implementacji REST API</li>
+                        <li class="fragment highlight-red">Techniki i frameworki pozwalające skalować systemy
+                            rozproszone</li>
+                        <li>Przegląd baz danych NoSQL, zastosowanie i użycie w mikroserwisach</li>
+                        <li>CQRS i Event Sourcing</li>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Fallacies of distributed computing</h3>
+                    <ol>
+                        <li class="fragment">The network is reliable</li>
+                        <li class="fragment">Latency is zero</li>
+                        <li class="fragment">Bandwidth is infinite</li>
+                        <li class="fragment">The network is secure</li>
+                        <li class="fragment">Topology doesn't change</li>
+                        <li class="fragment">There is one administrator</li>
+                        <li class="fragment">Transport cost is zero</li>
+                        <li class="fragment">The network is homogeneous</li>
+                    </ol>
+                    <aside class="notes">
+                        Zacznijmy od tego, co będzie nam stało na przeszkodzie
+                        <br>
+                        1994 (sic!)
+                        <br>
+                        koszt - http, json i inne to tekstowe rzeczy!!!
+                    </aside>
+                </section>
+                <section>
+                    <h2>Ready to fail - 1/2</h2>
+                    <ul>
+                        <li class="fragment">Eventual consistency</li>
+                        <li class="fragment">Service discovery, scentralizowana konfiguracja</li>
+                        <li class="fragment">Load balancing</li>
+                        <li class="fragment">Circuit breaker</li>
+                        <li class="fragment">Fail fast</li>
+                        <li class="fragment">Rolling deployment</li>
+                        <li class="fragment">Async by default
+                            <ul>
+                                <li class="fragment">At-Least-Once Delivery</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        Dużo z tych poruszymy
+                        <ul>
+                            <li>NoSQL</li>
+                            <li>health check, rejestrowanie się</li>
+                            <li>client-side LB</li>
+                            <li>fail fast się wiąże z circuit</li>
+                            <li>Kontenery, Docker dały możliwoścy tych rollingów i innych</li>
+                            <li>CQRS</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h2>Ready to fail - 2/2</h2>
+                    <ul>
+                        <li class="fragment">OAuth2, JWT</li>
+                        <li class="fragment">Metryki, monitoring</li>
+                        <li class="fragment">Logi, tracing</li>
+                        <li class="fragment">Testy kontraktowe</li>
+                        <li class="fragment">API Gateway</li>
+                        <li class="fragment">Saga, Process Manager</li>
+                    </ul>
+                    <aside class="notes">
+                        Tutaj mniej powiemy
+                        <ul>
+                            <li>Token zna uprawnienia, brak centralnego zarządcy (HTTP bezstanowe)</li>
+                            <li>Zbierać dane, "monitoring is a new testing", zapiąć czujki na odchylenia, PERCENTYLE
+                            </li>
+                            <li>Odkryć drogę żądania - brak jednego admina, trzeba przekazywać traceId i nadawać przy
+                                pierwszym wejściu</li>
+                            <li>Testowanie pomiędzy usługami; A == B && B == C => A == C</li>
+                            <li>Gateway, Edge service = punkt wejścia ze świata</li>
+                            <li>Rozproszone transakcje</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section data-background-image="img/quartet.png" data-background-size="contain">
+                    <aside class="notes">Kwartet Anscombe'a - zbiory praktycznie identyczne w prostych statystykach:
+                        średnia, wariancja, korelacja x-y, regresja liniowa; PRECENTYLE</aside>
+                </section>
+                <section>
+                    <h2>async > sync</h2>
+                    <a href="https://youtu.be/YjJZaGVwKAY" class="fragment" data-fragment-index="1">
+                        <img src="img/async/sync.png" style="width: 70%" class="pure-img fragment fade-out replace"
+                            data-fragment-index="2">
+                        <img src="img/async/async.png" style="width: 70%" class="pure-img fragment fade-in replace"
+                            data-fragment-index="2">
+                    </a>
+                    <aside class="notes">Nawet jak zielone pójdą równolegle, to i tak jedna failująca = całość failuje
+                    </aside>
+                </section>
+                <section>
+                    <h2>Frameworki</h2>
+                    <ul>
+                        <li class="fragment">Spring Boot, Cloud</li>
+                        <li class="fragment"><a href="https://axoniq.io/product-overview/axon-framework">Axon
+                                Framework</a></li>
+                        <li class="fragment"><a href="https://github.com/mfornos/awesome-microservices">Awesome
+                                Microservices</a></li>
+                    </ul>
+                    <aside class="notes">
+                        Spring zawsze miał filozofię zlepiania z dobrze działających kawałków. Boot to
+                        ułatwił, a Cloud zrobił użytek z narzędzi Netflixa
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section style="font-size: .7em">
+                    <h2 style="margin: 0">Ćwiczenie 2 - 1/2</h2>
+                    <ol>
+                        <li class="fragment">Skorzystać ze <a href="https://start.spring.io/">start.spring.io</a></li>
+                        <li class="fragment">Wyklikać:
+                            <ul>
+                                <li class="fragment">Java 11, Maven</li>
+                                <li class="fragment">Spring Data MongoDB, Embedded MongoDB Database</li>
+                                <li class="fragment">Rest Repositories</li>
+                                <li class="fragment">
+                                    Nazwa i opis: <i>plans</i>, <i>Management of the project plan</i>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Zmienić projekt w pom.xml na wzór poprzedniego - testy Groovy itd. Dodać
+                            zależność do pozostałych plików pom (parent, monolith)</li>
+                        <li class="fragment">Zmienić główną klasę programu na konfigurację, dodać konwertery dla Mongo
+                            (tak jak w poprzednim module)</li>
+                        <li class="fragment">Pobrać pliki z folderu "app", dodać je do aplikacji i przeanalizować</li>
+                        <li class="fragment">Wyszukać jak w Springu dodać obsługę dla
+                            <code>javax.validation.constraints.NotBlank</code></li>
+                        <li class="fragment">Stworzyć repozytorium, żeby móc odpalić jego test. Skorzystać z adnotacji
+                            <code>@RepositoryRestResource</code> i wystawić całość jako "plans"</li>
+                    </ol>
+                    <aside class="notes">
+                        Pokazać gdzie plany projektów wpisują się w obecną architekturę, czym są itd.
+                        <br>
+                        daysToDeadline - ujemny i dodatni. Co znaczą
+                        <br>
+                        Nowe technologie = nowe możliwości. Ile by było roboty, żeby dodać coś takiego do istniejącego
+                        projektu. Nawet jeśli mamy Spring Boota, to przecież deploy=masakra, testy itd. Małe, niezależne
+                        kawałki rulez. Walidacje w ogóle
+                    </aside>
+                </section>
+                <section style="font-size: .7em">
+                    <h2 style="margin: 0">Ćwiczenie 2 - 2/2</h2>
+                    <ol>
+                        <li class="fragment">Skorzystać z CURL-a albo Postmana, żeby stworzyć kilka przykładowych
+                            zapytań.</li>
+                        <li class="fragment">Czy walidacje działają jak należy? Czy status odpowiedzi jest zgodny z
+                            oczekiwaniami?</li>
+                        <li class="fragment">Skonfigurować parsowanie daty i walidacje przy pomocy klasy
+                            <code>RepositoryRestConfigurer</code></li>
+                        <li class="fragment">Skonfigurować, żeby całość była wystawiona jako <code>/api/plans</code>, a
+                            nie <code>/plans</code>
+                        </li>
+                        <li class="fragment">Jak działa HTTP PATCH przy wysłaniu <code>projectSteps</code> do obiektu,
+                            który już ma
+                            jakieś kroki?</li>
+                        <li class="fragment">Przetestować różne opcje <code>page</code>, <code>size</code>,
+                            <code>sort</code></li>
+                    </ol>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h2>Powiązane, pomocne</h2>
+                    <ul style="font-size: .9em">
+                        <li><a href="https://youtu.be/YjJZaGVwKAY">Toruń JUG #32 - "Asynchronous by default, synchronous
+                                when necessary" - Tomasz Nurkiewicz</a></li>
+                        <li><a href="https://youtu.be/zq71CKfiB0g">Boiling Frogs 2019 - Jakub Kubryński - Kuloorporna
+                                komunikacja w systemtach rozproszonych</a></li>
+                        <li><a href="https://youtu.be/M7sHpEA7298">4Developers 2019: Distributed journey, Piotr
+                                Gankiewicz</a></li>
+                        <li><a href="https://blog.risingstack.com/designing-microservices-architecture-for-failure/">Designing
+                                a Microservices Architecture for Failure</a></li>
+                        <li>
+                            <a href="https://codeboje.de/spring-data-rest-tutorial/">Expose Your Spring Data
+                                Repositories as a REST API</a>
+                        </li>
+                    </ul>
+                    <aside class="notes">Ostatnie - HAL browser</aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2>Faza 1 - modularny monolit</h2>
+                    <ol>
+                        <li>Dobre praktyki w projektowaniu i implementacji REST API</li>
+                        <li>Techniki i frameworki pozwalające skalować systemy rozproszone</li>
+                        <li class="fragment highlight-red">Przegląd baz danych NoSQL, zastosowanie i użycie w
+                            mikroserwisach</li>
+                        <li>CQRS i Event Sourcing</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>Założenia</h2>
+                    <ul>
+                        <li class="fragment">Nawet nie tyle NoSQL, co "nieleacyjne"</li>
+                        <li class="fragment">Ruch "Polyglot Persistence" = Not Only SQL</li>
+                        <li class="fragment">Wygoda używania - brak ścisłych schematów
+                            <ul>
+                                <li class="fragment">Ale możliwość stworzenia np. jakichś walidacji</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Skalowalność, działanie w świecie rozproszonym</li>
+                        <li class="fragment">Brak relacji = szybkość odczytu</li>
+                        <li class="fragment">Bardziej "obiektowa" reprezentacja danych</li>
+                        <li class="fragment">Praktycznie zawsze Open Source, a na pewno budowane z otwartych technologii
+                        </li>
+                    </ul>
+                    <aside class="notes">
+                        Niektóre mają nawet jakieś interfejsy SQL-owe
+                        <br>
+                        Start NoSQL ~2000 vs. 1970; od razu pod mikrousługi
+                    </aside>
+                </section>
+                <section>
+                    <h2>Złoty młotek?</h2>
+                    <ul>
+                        <li class="fragment">Koniec końców i tak potrzebni są admini, zarządzający klastrami itd.</li>
+                        <li class="fragment">Każda baza ma swój język. Jednak znany wszystkim SQL to duży plus</li>
+                        <li class="fragment">Zamiast JOIN-ów, konieczność wielu małych zapytań</li>
+                        <li class="fragment">CAP?</li>
+                    </ul>
+                    <aside class="notes">CouchDB - REST, Mongo - a'la JS</aside>
+                </section>
+                <section data-background-image="img/cap.png" data-background-size="contain">
+                    <aside class="notes">MongoDB is a single-master system and all reads go to the primary by default.
+                        If you optionally enable reading from the secondaries then MongoDB becomes eventually consistent
+                        where it's possible to read out-of-date results
+                        <br>
+                        Dużo zależy od celu powstania - np. Cassandra - zapis, dodawanie do koszyka w Amazonie; że dodam
+                        na tel i na kompie i się rozjedzie to mniejszy problem
+                    </aside>
+                </section>
+                <section>
+                    <table>
+                        <tr>
+                            <td style="width: 50%; font-weight: bold; text-align: center;">SQL Terms/Concepts</td>
+                            <td style="width: 50%; font-weight: bold; text-align: center;">MongoDB Terms/Concepts</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>table</td>
+                            <td>collection</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>row</td>
+                            <td>document or BSON document</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>column</td>
+                            <td>field</td>
+                        </tr>
+                        <tr class="fragment">
+                            <td>index</td>
+                            <td>index</td>
+                        </tr>
+                    </table>
+                    <div class="fragment">
+                        <a href="https://docs.mongodb.com/manual/reference/sql-comparison/">
+                            SQL to MongoDB Mapping Chart</a>
+                    </div>
+                </section>
+                <section>
+                    <h2>Różne bazy</h2>
+                    <ol>
+                        <li class="fragment">Relacyjne
+                            <ul>
+                                <li class="fragment">Ustrukturyzowane dane z relacjami i językiem zapytań</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">NoSQL
+                            <ol>
+                                <li class="fragment">Klucz-wartość</li>
+                                <li class="fragment">Dokumentowe</li>
+                                <li class="fragment">Wide column</li>
+                                <li class="fragment">Grafowe</li>
+                            </ol>
+                        </li>
+                        <li class="fragment">Inne (time series)</li>
+                    </ol>
+                    <p class="fragment">
+                        <a href="https://en.wikipedia.org/wiki/NoSQL#Types_and_examples">Wiki - NoSQL Types and
+                            examples</a>
+                    </p>
+                    <aside class="notes">
+                        klik w link
+                        <br>
+                        Różne kolumny w wide column przechowywane osobno na dysku. 2-wymiarowa baza key-val (kolumny
+                        swoje dane i rekordy swoje)
+                        <br>
+                        Relacje oddane krawędziami pomiędzy węzłami; trudno wyobrazić sobie takie relacje, media
+                        społecznościowe - temu zalajkował, ale na to tylko popatrzył
+                        <br>
+                        Time series = np. zużycie procesora
+                        <br>
+                        Powiedziałbym, że teraz NewSQL - Presto i inne karaluchy, time series z interfejsami SQL itd.
+                    </aside>
+                </section>
+                <section>
+                    <h2><img src="img/redis.png" class="pure-img" style="height: 1em;"></h2>
+                    <ul>
+                        <li class="fragment">Klucz-wartość, Data-Structures Server</li>
+                        <li class="fragment">In-memory, ale można też zrzucać dane</li>
+                        <li class="fragment">Obsługuje różne struktury - stringi, zbiory, listy, bitmapy, streamy</li>
+                        <li class="fragment">Na dysku - format nienadający się do odczytu, a&nbsp;tylko do rekonstrukcji
+                            trzymania w pamięci
+                        </li>
+                        <li class="fragment">Superszybki dzięki temu in-memory</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2><img src="img/mongo.png" class="pure-img" style="height: 1em;"></h2>
+                    <ul>
+                        <li class="fragment">Baza dokumentowa z binarnym zapisem danych (BSON = Binary JSON)</li>
+                        <li class="fragment">Indeksowanie, szukanie po regexach</li>
+                        <li class="fragment">Load balancing przy wyskalowaniu horyzontalnym</li>
+                        <li class="fragment">Agregowanie danych</li>
+                        <li class="fragment">Transakcje, nawet na wiele dokumentów (od v4)</li>
+                        <li class="fragment">Taki NoSQL dla SQL-owców</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2><img src="img/neo.png" class="pure-img" style="height: 1em;"></h2>
+                    <ul>
+                        <li class="fragment">Baza grafowa, jedna z najpopularniejszych</li>
+                        <li class="fragment">Wszystko jest węzłem, krawędzią lub atrybutem</li>
+                        <li class="fragment">Węzły i krawędzie mają dodatkowo etykiety, żeby ułatwiać szukanie</li>
+                        <li class="fragment">Cypher Query Language - możliwości SQL-a, ale składnia dostosowana do
+                            grafów</li>
+                    </ul>
+                    <aside class="notes">Twórca springa jest dyrektorem zarządu</aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h2 style="margin: 0">Ćwiczenie 3</h2>
+                    <ol>
+                        <li class="fragment">Zapoznać się z zapytaniami Mongo, korzystając z interaktywnej strony <a
+                                href="https://docs.mongodb.com/manual/tutorial/query-documents/">Query Documents</a>
+                        </li>
+                        <li class="fragment">
+                            Zainstalować <a href="https://plugins.jetbrains.com/plugin/7141-mongo-plugin">plugin do
+                                Mongo</a> dla IntelliJ
+                        </li>
+                        <li class="fragment">Dodać więcej tasków i wyszukać:
+                            <ul style="font-size: .8em">
+                                <li class="fragment">Tylko zrobione taski</li>
+                                <li class="fragment">Taski, których id zawiera jakiś ciąg znaków, np. "4bc"</li>
+                                <li class="fragment">Taski, których deadline jest sprzed jakiejś daty, np. przed
+                                    18.11.2019
+                                </li>
+                                <li class="fragment">Taski, których deadline jest sprzed jakiejś daty lub po prostu go
+                                    nie ma</li>
+                                <li class="fragment">Taski, których deadline jest sprzed jakiejś daty lub po prostu go
+                                    nie ma i są zrobione
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            <a href="https://docs.mongodb.com/manual/reference/sql-comparison/">SQL to MongoDB Mapping
+                                Chart</a>
+                        </li>
+                    </ol>
+                    <aside class="notes">
+                        Ktoś nie zna SQL?
+                        <pre><code>{done:true}</code></pre>
+                        <pre><code>{taskId: {$regex: "4bc"}}</code></pre>
+                        <pre><code>{deadline: {$lt: ISODate("2019-13-11T00:00:00.000Z")}}</code></pre>
+                        <pre><code>{$or: [{deadline: {$gt: ISODate("2019-11-13T00:00:00.000Z")}}, {deadline: null}]}</code></pre>
+                        <pre><code>{$or: [{deadline: {$gt: ISODate("2019-11-13T00:00:00.000Z")}}, {deadline: null}], done: true}</code></pre>
+                    </aside>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-background-image="img/drake.jpg" data-background-size="contain">
+                    <aside class="notes">Tak jak HQL dla niby takich samych, ale jednak innych SQL-i</aside>
+                </section>
+                <section>
+                    <h2>Hibernate?</h2>
+                    <ul>
+                        <li class="fragment">
+                            <pre
+                                style="display: inline-block; height: 1em; width: 100%;"><code class="java">org.springframework.data.mongodb.core.mapping</code></pre>
+                        </li>
+                        <li class="fragment">
+                            <code>@Entity</code> => <code>@Document</code>
+                        </li>
+                        <li class="fragment">
+                            <code>@Column</code> => <code>@Field</code>
+                        </li>
+                        <li class="fragment">
+                            <pre
+                                style="display: inline-block; height: 1em;"><code class="java">javax.validation.constraints</code></pre>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h2>Ćwiczenie 4</h2>
+                    <ol>
+                        <li class="fragment">Napisać wszystkie zapytania z poprzedniego ćwiczenia, korzystając z
+                            <code>TaskMongoRepository</code></li>
+                        <li class="fragment">Sprawdzić działanie w teście</li>
+                    </ol>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h2>Mongo w Springu</h2>
+                    <pre
+                        style="width: 100%;"><code class="bash" data-trim style="font-size: .8em; max-height: 40em;">
+                            # MONGODB (MongoProperties)
+                            spring.data.mongodb.authentication-database= # Authentication database name.
+                            spring.data.mongodb.database= # Database name.
+                            
+                            # Fully qualified name of the FieldNamingStrategy to use.
+                            spring.data.mongodb.field-naming-strategy= 
+                            spring.data.mongodb.grid-fs-database= # GridFS database name.
+                            spring.data.mongodb.host= # Mongo server host. Cannot be set with URI.
+                            
+                            # Login password of the mongo server. Cannot be set with URI.
+                            spring.data.mongodb.password= 
+                            spring.data.mongodb.port= # Mongo server port. Cannot be set with URI.
+                            spring.data.mongodb.repositories.type=auto # Type of Mongo repositories to enable.
+                            
+                            # Mongo database URI. Cannot be set with host, port and credentials.
+                            spring.data.mongodb.uri=mongodb://localhost/test
+                            spring.data.mongodb.username= # Login user of the mongo server. Cannot be set with URI.</code></pre>
+                </section>
+                <section>
+                    <h2>Powiązane, pomocne</h2>
+                    <ul>
+                        <li>
+                            <a href="https://blog.nahurst.com/visual-guide-to-nosql-systems">Visual Guide to NoSQL
+                                Systems</a>
+                        </li>
+                        <li>
+                            <a href="https://docs.mongodb.com/manual/tutorial/query-documents/">Query Documents</a>
+                        </li>
+                        <li>
+                            <a href="https://docs.mongodb.com/manual/reference/sql-comparison/">SQL to MongoDB Mapping
+                                Chart</a>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2>Faza 1 - modularny monolit</h2>
+                    <ol>
+                        <li>Dobre praktyki w projektowaniu i implementacji REST API</li>
+                        <li>Techniki i frameworki pozwalające skalować systemy rozproszone</li>
+                        <li>Przegląd baz danych NoSQL, zastosowanie i użycie w mikroserwisach</li>
+                        <li class="fragment highlight-red">CQRS i Event Sourcing</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>A gdyby tak...</h2>
+                    <ul>
+                        <li class="fragment">System to komendy i odczyty + zdarzenia</li>
+                        <li class="fragment">Zachowania</li>
+                        <li class="fragment">
+                            Warto stawiać na zachowania - łatwiej wychwycić reguły biznesowe (np. w
+                            rozmowie z "biznesem")
+                        </li>
+                        <li class="fragment">CQRS + ES!</li>
+                    </ul>
+                    <aside class="notes">Inne spojrzenie na temat</aside>
+                </section>
+                <section>
+                    <h2>Command</h2>
+                    <ul>
+                        <li class="fragment">Zmienia stan</li>
+                        <li class="fragment">POST, PUT, PATCH, DELETE</li>
+                        <li class="fragment">Wychodzi od użytkownika, skutkuje zmianą w systemie (zdarzeniem)
+                            <ul>
+                                <li class="fragment">Potencjalnie jakieś automaty, nie tylko użytkownicy</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <aside class="notes">Ale automat to raczej zdarzenie, a nie komenda</aside>
+                </section>
+                <section>
+                    <h2>Query</h2>
+                    <ul>
+                        <li class="fragment">Bezinwazyjny odczyt danych</li>
+                        <li class="fragment">GET</li>
+                        <li class="fragment">Prezentowanie dla użytkownika</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Responsibility Segregation</h2>
+                    <ul>
+                        <li class="fragment">Podział. Osobne modele do odczytu i do zapisu</li>
+                        <li class="fragment">Mogą być zoptymalizowane - np. do odczytu baza relacyjna, do zapisu -
+                            Cassandra
+                        </li>
+                        <li class="fragment">Synchronizacja danych - model odczytu reaguje na zdarzenie, wygenerowane
+                            przez zapisy
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Event Sourcing</h2>
+                    <ul>
+                        <li class="fragment">Niemutowalny, append-only log zdarzeń</li>
+                        <li class="fragment">To tak można?
+                            <ul>
+                                <li class="fragment">Np. w księgowości - nie da się zmienić wystawionej faktury.
+                                    Faktura-korekta</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">"Lekka" wersja - model zapisu rzuca eventy, model odczytu nasłuchuje</li>
+                        <li class="fragment">100% - zdarzenia jako jedyne źródło informacji</li>
+                    </ul>
+                    <aside class="notes">Np. nie da się inaczej zbudować modelu, jak przez nałożenie na siebie
+                        wszystkich eventów. Wchodzi komenda, to musi ogarnąć jaki jest aktualny stan
+                        <br>
+                        Nowe wymaganie - zaproponowanie komuś produktu, który kiedyś został usunięty z koszyka; w ES
+                        mamy te dane, możemy to dodać
+                    </aside>
+                </section>
+                <section data-background-image="img/cqrs/single.png" data-background-size="contain"></section>
+                <section data-background-image="img/cqrs/cqrs.png" data-background-size="contain">
+                    <img src="img/cqrs/cqrs-hard.jpg" class="pure-img fragment">
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    <h2>Ćwiczenie 5</h2>
+                    <ol>
+                        <li class="fragment">Pobrać testy i zobaczyć, czego brakuje</li>
+                        <li class="fragment">Dodać proste klasy TaskCreated, TaskDone i TaskUndone. Mogą mieć klasę
+                            bazową TaskEvent</li>
+                        <li class="fragment">Zmienić Task, żeby oprócz zmiany pola done, zwracał powyższe klasy</li>
+                        <li class="fragment">Dodać klasę TaskService, zawierającą w sobie repozytorium, przekazywaną do
+                            kontrolera</li>
+                        <li class="fragment">W serwisie dodać jeszcze ApplicationEventPublisher i w istotnych metodach
+                            dodać adnotację @Transactional, a także wołać publisher.publishEvent(event)</li>
+                        <li class="fragment">Zmienić kontroler, żeby korzystał z metody PATCH i pozwalał wyłącznie na
+                            zmianę statusu taska</li>
+                    </ol>
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section data-transition="zoom">
+                    [ćw] Możemy sobie tworzyć różne projekcje - dane są: najszybciej zmieniony task, najczęściej
+                    zmieniane taski, zrobione taski, najwięcej czasu PRZED deadline, najwięcej po. Dopisać kilka nowych
+                    projekcji
+                    Docelowo to z bazy moglibyśmy tak wyciągać
+                    <br>Mogłaby tu być w ogóle jakaś inna baza, z której umiemy ładnie czytać
+                </section>
+            </section>
+            <section data-background-image="" data-transition="zoom">
+                <section>
+                    <h2>Powiązane, pomocne</h2>
+                    <ul>
+                        <li><a href="https://www.martinfowler.com/bliki/CQRS.html">Martin Fowler, CQRS</a></li>
+                        <li>
+                            <a href="https://youtu.be/jyRspw_Bl18">JDD 2017: EventSourcing i CQRS. Wprowadzenie, którego
+                                brakowało (Sławomir Jachowicz)</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/ddd-by-examples/all-things-cqrs">all-things-cqrs</a>; polecam: <code>with-application-events-immutable</code>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="js/reflect.js"></script>
+    <script src="js/zone.js"></script>
+    <script src="js/rxjs.js"></script>
+    <script src="js/ang-core.js"></script>
+    <script src="js/ang-common.js"></script>
+    <script src="js/ang-compiler.js"></script>
+    <script src="js/ang-platform.js"></script>
+    <script src="js/ang-platform-dynamic.js"></script>
+    <script src="js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script>
+        const controls = (function () {
+            Reveal.initialize({
+                history: true,
+                // - null: Media will only autoplay if data-autoplay is present
+                autoPlayMedia: null,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+                transitionSpeed: 'default', // default/fast/slow
+                backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
+                dependencies: [
+                    { src: 'js/classList.js', condition: function () { return !document.body.classList; } },
+
+                    { src: 'js/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                    { src: 'js/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+
+                    // Syntax highlight for <code> elements
+                    { src: 'js/highlight.js', callback: function () { setTimeout(() => hljs.initHighlightingOnLoad(), 0); } },
+
+                    // Zoom in and out with Alt+click
+                    { src: 'js/zoom.js' },
+
+                    { src: 'notes/notes.js' },
+
+                    { src: 'js/math.js' }
+                ]
+            });
+
+            document.querySelectorAll('.reveal .slides section:not([data-background-image])').forEach(s => {
+                s.setAttribute('data-background-image', 'img/twitter.png');
+                s.setAttribute('data-background-size', '240px');
+                s.setAttribute('data-background-position', '20px 20px');
+            });
+
+            return {
+                evalCode(btn) {
+                    eval(extractCodeFromBefore(btn));
+                },
+                evalTsCode(btn, once) {
+                    const input = extractCodeFromBefore(btn);
+                    const output = Babel.transform(input, {
+                        plugins: [
+                            ['transform-modules-umd', {
+                                globals: {
+                                    '@angular/core': 'ng.core',
+                                    '@angular/platform-browser': 'ng.platformBrowser',
+                                    '@angular/platform-browser-dynamic': 'ng.platformBrowserDynamic',
+                                    'zone.js': 'Zone',
+                                    'core-js/es/reflect': 'coreJs',
+                                    'core-js/features/reflect': 'coreJs'
+                                },
+                                exactGlobals: true
+                            }],
+                            'transform-typescript',
+                            ['proposal-decorators', { legacy: true }],
+                            ['proposal-class-properties', { loose: true }]
+                        ]
+                    }).code;
+                    eval.call(window, output);
+                    if (once) {
+                        btn.disabled = true;
+                    }
+                }
+            }
+
+            function extractCodeFromBefore(btn) {
+                return [...btn.parentElement.querySelectorAll('pre')].filter(e => getComputedStyle(e).display !== 'none')[0].innerText;
+            }
+        })();
+    </script>
+</body>
+
+</html>
