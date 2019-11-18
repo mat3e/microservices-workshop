@@ -1,10 +1,3 @@
-cw-*
-microservices
-cw*/odp
-!cw1/odp
-!cw2/odp
-!cw*/odp/postman*.json
-
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
