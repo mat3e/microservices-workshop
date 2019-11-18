@@ -1,7 +1,7 @@
-# Ćwiczenie 5
-1. Pobrać testy i zobaczyć, czego brakuje
-2. Dodać proste klasy `TaskCreated`, `TaskDone` i `TaskUndone`. Mogą mieć klasę bazową `TaskEvent`
-3. Zmienić `Task`, żeby oprócz zmiany pola `done`, zwracał powyższe klasy
-4. Dodać klasę `TaskService`, zawierającą w sobie repozytorium, przekazywaną do kontrolera
-5. W serwisie dodać jeszcze `ApplicationEventPublisher` i w istotnych metodach dodać adnotację `@Transactional`, a także wołać `publisher.publishEvent(event)`
-6. Zmienić kontroler, żeby korzystał z metody PATCH i pozwalał wyłącznie na zmianę statusu taska
+# Ćwiczenie 6
+1. Utworzyć nowy moduł - `mongodb` i `web`, nazwać go `reports`
+2. Dodać i zarejestrować klasę, np. `ReportedTaskEventListener`, która będzie nasłuchiwać na zdarzenia Springa (można się posłużyć przykładem z folderu `example`)
+3. Utworzyć klasę reprezentującą "zaraportowany task" - odpowiednik klasy `Task`, który będzie powstawał ze zdarzeń (stworzyć odpowiednie konstruktory)
+4. Na każde odebrane zdarzenie zapisywać "zaraportowany task" w bazie
+5. Stworzyć kontroler, który umożliwi nową reprezentację klasy `Task` na różne sposoby, na podstawie zaraportowanych tasków: najszybciej zmieniony task, najczęściej zmieniane taski, zrobione taski, najwięcej czasu PRZED deadline, najwięcej po
+   * minimum: task w aktualnym stanie + ile razy był zmieniany i raport zrobionych tasków
