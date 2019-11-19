@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "0bb6c8f5-623c-47ee-8ce1-fd70d696050c",
+		"name": "microservices/reports",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "read report with done tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/reports/done",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"reports",
+						"done"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read report with tasks changes count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/reports/count",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"reports",
+						"count"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
