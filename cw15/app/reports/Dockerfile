@@ -1,0 +1,11 @@
+FROM adoptopenjdk:11-jre-hotspot
+
+ENV SPRING_PROFILES_ACTIVE=prod
+ENV SERVER_PORT=8080
+ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS
+
+COPY target/*.jar app.jar
+
+CMD java -jar /app.jar
+
+EXPOSE ${SERVER_PORT}

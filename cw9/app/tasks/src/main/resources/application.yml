@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      database: tasks
+
+  # can be overridden with -Dspring.profiles.active or in IntelliJ run config
+  profiles:
+    active: local

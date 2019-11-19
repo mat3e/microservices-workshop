@@ -1,0 +1,15 @@
+plans.services.tasksUrl: http://localhost:8083/api/tasks
+
+server.port: 8081
+
+spring:
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
