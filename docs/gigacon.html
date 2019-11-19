@@ -30,7 +30,7 @@
             position: absolute;
         }
 
-        #about-me {
+        .reveal .slides section .about-me {
             padding: 1em;
             background-color: rgba(255, 255, 255, .75);
             list-style-type: none;
@@ -38,17 +38,17 @@
             float: left;
         }
 
-        #about-me ul {
+        .reveal .slides section .about-me ul {
             list-style-type: none;
             float: left;
             margin-left: 0;
         }
 
-        #about-me a {
+        .reveal .slides section .about-me a {
             color: #a23;
         }
 
-        #about-me a:hover {
+        .reveal .slides section .about-me a:hover {
             color: #dd5566;
         }
 
@@ -229,7 +229,7 @@
                     <div id="header-logo"></div>
                 </section>
                 <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
-                    <ul id="about-me">
+                    <ul class="about-me">
                         <li>
                             <ul style="padding: 0">
                                 <li>
@@ -1640,7 +1640,7 @@
                         3. <!-- .element: class="fragment" data-fragment-index="3" --> Przenieść konfigurację z monolitu ("application.properties") do "plans". Dodać wpisy  `spring.data.mongodb.database=plans` i `spring.profiles.active=local`*
                         4. <!-- .element: class="fragment" --> Utworzyć plik "application-local.properties" i ustawić w nim `server.port=8081`
                         5. <!-- .element: class="fragment" --> Usunąć `TestApp` z "plans"
-                        
+
                         ___
                         *Spring włączając aplikację ustawi profil "local" i będzie korzystał z dostosowanych do tego ustawień <!-- .element: class="fragment" data-fragment-index="3" style="font-size: .65em; taxt-align: left" -->
                     </script>
@@ -1675,8 +1675,8 @@
                         6. <!-- .element: class="fragment" --> Stworzyć klasę `TaskDto` z konstruktorem ustawiającym pola:
                            ```
                            @JsonCreator
-                           TaskDto(@JsonProperty("id") String id, 
-                                   @JsonProperty("text") String text, 
+                           TaskDto(@JsonProperty("id") String id,
+                                   @JsonProperty("text") String text,
                                    @JsonProperty("deadline") ZonedDateTime deadline)
                            ```
                            Dodać też `equals`, `hashCode`, gettery i konstruktor pobierający tylko `text` i `deadline`.
@@ -1906,7 +1906,7 @@
                            ```
                         2. Stworzyć klasę `TaskClient`, pobierającą `RestTemplate` i `ConfigProps`. Przenieść do niej wysyłanie zapytania do mikroserwisu tasków. Użyć tej klasy w klasie `TaskController`
                         3. W oparciu o [przykład](https://resilience4j.readme.io/docs/getting-started-3), dodać adnotację `@CircuitBreaker` i wartości konfiguracyjne, m.in. `waitDurationInOpenState: 60s` i w razie niepowodzenia, logować informację w konsoli i zwracać przekazany task
-                           * Można stworzyć metodę np. 
+                           * Można stworzyć metodę np.
                               ```
                               private TaskDto fallback(TaskDto toSend, IllegalStateException e)
                               ```
@@ -1971,17 +1971,132 @@
                 </section>
             </section>
             <section data-background-image="" data-transition="zoom">
-                <section data-transition="zoom">Ćwiczenie 14</section>
+                <section data-transition="zoom">
+                    <h2>Ćwiczenie 14</h2>
+                    <ol>
+                        <li class="fragment">Dodać wszędzie pliki dockerowe</li>
+                        <li class="fragment">Skorzystać z opisu plugina mavenowego i tworzyć obraz, np.
+                            "microservices/tasks" dla usługi "tasks"</li>
+                        <li class="fragment">Ustawić, żeby plugin odpalał budowanie dockerem dopiero przy mvn package
+                        </li>
+                        <li class="fragment">Dodać to w każdej usłudze i zawołać clean package z poziomu projektu
+                            parent.</li>
+                        <li class="fragment">Zweryfikować istnienie obrazów poleceniem docker images</li>
+                    </ol>
+                </section>
             </section>
-            <section data-background-image="" data-transition="zoom">
-                <section data-transition="zoom">Ćwiczenie 15</section>
+            <section data-background-image="" data-transition="zoom" style="font-size: .5em">
+                <section data-transition="zoom">
+                    <h2 style="margin: 0">Ćwiczenie 15</h2>
+                    <ol>
+                        <li class="fragment">Otworzyć kod z folderu "app"</li>
+                        <li class="fragment">W obrazach dockerowych dodać opóźnienie startu aplikacji
+                            <ul>
+                                <li class="fragment">Skorzystać ze zmiennej środowiskowej ENV DELAY_START=0</li>
+                                <li class="fragment">Zmienić komendę startującą:
+                                    <pre
+                                        style="margin: 0; font-size: .5em"><code class="bash" data-trim>
+                                        CMD echo "The application will start in ${DELAY_START}s..." && sleep ${DELAY_START} && java -jar /app.jar</code></pre>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Przeanalizować plik docker-compose-tools.yml - uruchomienie zewnętrznych
+                            narzędzi</li>
+                        <li class="fragment">Stworzyć docker-compose-apps.yml, który skorzysta z naszych obrazów, np.
+                            "microservices/tasks". Ustawić kontenerowi zmienne, które nadpiszą wartości np. z
+                            bootstrap.yml albo application.yml
+                            <ul class="fragment">
+                                <li>SPRING_CLOUD_CONSUL_HOST=consul</li>
+                                <li>SPRING_CLOUD_CONSUL_PORT=8500</li>
+                                <li>SPRING_DATA_MONGODB_URI=mongodb://mongo:27017</li>
+                                <li>SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka</li>
+                                <li>SPRING_CLOUD_STREAM_KAFKA_BINDER_ZK_NODES=zookeeper</li>
+                                <li>DELAY_START=10</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Ustawić mapowania portów, np. 8082:8080 - to co w kontenerze jako 8080, u
+                            nas 8082</li>
+                        <li class="fragment">W przypadku serwisu tasków dodać mapowanie 8083-8085:8080</li>
+                        <li class="fragment">Zatrzymać wszystkie dockery i uruchomić: docker-compose -f
+                            docker-compose-tools.yml -f docker-compose-apps.yml up. Pod jakim adresem jest usługa
+                            tasków?</li>
+                        <li class="fragment">Zawołać
+                            <pre
+                                style="margin: 0; font-size: .6em"><code class="bash" data-trim>
+                                    docker-compose -f docker-compose-tools.yml -f docker-compose-apps.yml up --scale tasks=3 -d</code></pre>
+                        </li>
+                    </ol>
+                </section>
             </section>
             <section data-background-image="" data-transition="zoom">
                 <section data-transition="zoom">
-                        https://docs.docker.com/engine/reference/builder/
-                        
-                        https://docs.docker.com/compose/extends/
+                    <h2>Powiązane, pomocne</h2>
+                    <ul>
+                        <li><a href="https://docs.docker.com/engine/reference/builder/">Dockerfile</a></li>
+                        <li><a href="https://docs.docker.com/compose/extends/">docker-compose</a></li>
+                    </ul>
                 </section>
+            </section>
+            <section data-background-image="img/bg-hd.jpg" data-background-transition="zoom">
+                <ul class="about-me">
+                    <li>
+                        <ul style="padding: 0">
+                            <li>
+                                <a href="https://www.linkedin.com/in/mateusz-chrzonstowski/">
+                                    <i class="fab fa-linkedin"
+                                        style="color: #0077B5; background-color: #FFF; line-height: .75em"></i>
+                                    /mateusz-chrzonstowski
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/_mat3e_">
+                                    <i class="fab fa-twitter-square"
+                                        style="background-color: #1DA1F2; color: #FFF; line-height: .75em"></i>
+                                    /_mat3e_
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.reddit.com/user/_mat3e_">
+                                    <i class="fab fa-reddit-square"
+                                        style="background-color: #FF4500; color: #FFF; line-height: .75em"></i>
+                                    /_mat3e_
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/mat3e/">
+                                    <i class="fab fa-github-square"
+                                        style="color: #24292E; background-color: #FFF; line-height: .75em"></i>
+                                    /mat3e
+                                </a>
+                            </li>
+                            <li style="line-height: 1">&nbsp;</li>
+                            <li style="line-height: .75">
+                                <a style="font-size: .7em; font-weight: bold;"
+                                    href="https://mat3e.github.io/microservices-workshop/gigacon.html">
+                                    mat3e.github.io
+                                    <div style="padding-left: .5em;">
+                                        /microservices-workshop/gigacon
+                                    </div>
+                                </a>
+                            </li>
+                            <li style="line-height: 1">&nbsp;</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul style="padding: .1em; line-height: 1">
+                            <li>
+                                <a href="https://www.udemy.com/fajny-javascript/?couponCode=OPENALL">
+                                    <img src="img/udemy.svg" class="pure-img" style="height: 1.5em;">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://allegro.tech/about-us/">
+                                    <img src="img/allegro-tech.svg" class="pure-img" style="height: 1.5em;">
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </section>
         </div>
     </div>
