@@ -2,9 +2,6 @@ package io.github.mat3e.sink;
 
 import io.github.mat3e.model.ReportedTaskState;
 import io.github.mat3e.model.ReportedTaskStateRepository;
-import io.github.mat3e.model.TaskCreated;
-import io.github.mat3e.model.TaskDone;
-import io.github.mat3e.model.TaskUndone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.annotation.StreamListener;
