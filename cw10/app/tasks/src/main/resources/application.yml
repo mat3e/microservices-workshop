@@ -4,8 +4,9 @@ spring:
   cloud:
     stream:
       bindings:
-        output: tasks
-        contentType: application/json
+        output:
+          destination: tasks
+          contentType: application/json
   data:
     mongodb:
       database: tasks
