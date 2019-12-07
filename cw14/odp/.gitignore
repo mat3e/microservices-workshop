@@ -1,7 +1,3 @@
-cw-*
-microservices
-cw15/odp
-
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
