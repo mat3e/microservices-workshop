@@ -6,9 +6,9 @@
    1. W konfiguracji udostępnić wszyskie endpoiny Actuatora wszystkim serwisom:
       ```
        management:
-       endpoints:
+         endpoints:
            web:
-           exposure:
+             exposure:
                include: "*"
        ```
 4. W niedziałających testach Groovy dodać `@TestPropertySource(properties = ['spring.cloud.consul.config.enabled = false'])` (brak konfiguracji z Consula przy odpalaniu testu)
