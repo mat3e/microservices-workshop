@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: tasks
+          contentType: application/json
+  data:
+    mongodb:
+      database: reports
+
+  # can be overridden with -Dspring.profiles.active or in IntelliJ run config
+  profiles:
+    active: local

@@ -1,0 +1,9 @@
+plans.services.tasksUrl: http://localhost:8083/api/tasks
+
+server.port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
