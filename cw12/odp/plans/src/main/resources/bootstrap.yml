@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: plans
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        format: YAML
