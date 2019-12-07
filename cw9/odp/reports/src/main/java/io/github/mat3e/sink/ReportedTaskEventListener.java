@@ -4,8 +4,8 @@ import io.github.mat3e.model.ReportedTaskState;
 import io.github.mat3e.model.ReportedTaskStateRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.event.EventListener;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,8 +17,7 @@ class ReportedTaskEventListener {
         this.repository = repository;
     }
 
-    @Async
-    @EventListener
+    @StreamListener(target = Sink.INPUT, condition = "headers['type'] == 'created'")
     public void on(TaskCreated taskCreated) {
         logger.info("New task created: " + taskCreated.getId());
         var state = new ReportedTaskState(
@@ -30,15 +29,13 @@ class ReportedTaskEventListener {
         repository.save(state);
     }
 
-    @Async
-    @EventListener
+    @StreamListener(target = Sink.INPUT, condition = "headers['type'] == 'done'")
     public void on(TaskDone task) {
         logger.info("Task changed: " + task.getId());
         repository.save(ReportedTaskState.done(task.getId(), task.getOccurredOn()));
     }
 
-    @Async
-    @EventListener
+    @StreamListener(target = Sink.INPUT, condition = "headers['type'] == 'undone'")
     public void on(TaskUndone task) {
         logger.info("Task changed: " + task.getId());
         repository.save(ReportedTaskState.undone(task.getId(), task.getOccurredOn()));
