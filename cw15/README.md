@@ -10,9 +10,15 @@
    - `SPRING_CLOUD_CONSUL_PORT=8500`
    - `SPRING_DATA_MONGODB_URI=mongodb://mongo:27017`
    - `SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka`
-   - `SPRING_CLOUD_STREAM_KAFKA_BINDER_ZK_NODES=zookeeper`
    - `DELAY_START=10`
 5. Ustawić mapowania portów, np. `8082:8080` - to co w kontenerze jako 8080, u nas 8082
 6. W przypadku serwisu tasków dodać mapowanie `8083-8085:8080`
-7. Zatrzymać wszystkie dockery i uruchomić: `docker-compose -f docker-compose-tools.yml -f docker-compose-apps.yml up -d`. Pod jakim adresem jest usługa tasków?
-8. Zawołać `docker-compose -f docker-compose-tools.yml -f docker-compose-apps.yml up --scale tasks=3 -d`
+7. Nadpisać ustawienie kontenera kafki:
+   ```
+   kafka:
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+   ```
+8. Zatrzymać wszystkie dockery i uruchomić: `docker-compose -f docker-compose-tools.yml -f docker-compose-apps.yml up -d`. Pod jakim adresem jest usługa tasków?
+9. Zawołać `docker-compose -f docker-compose-tools.yml -f docker-compose-apps.yml up --scale tasks=3 -d`
+10. Można zmienić `docker-compose-tools.yml` na `docker-compose.yml`
