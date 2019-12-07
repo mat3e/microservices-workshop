@@ -16,8 +16,8 @@
 7. Nadpisać ustawienie kontenera kafki:
    ```
    kafka:
-    environment:
-      - KAFKA_ADVERTISED_HOST_NAME=kafka
+     environment:
+       - KAFKA_ADVERTISED_HOST_NAME=kafka
    ```
 8. Zatrzymać wszystkie dockery i uruchomić: `docker-compose -f docker-compose-tools.yml -f docker-compose-apps.yml up -d`. Pod jakim adresem jest usługa tasków?
 9. Zawołać `docker-compose -f docker-compose-tools.yml -f docker-compose-apps.yml up --scale tasks=3 -d`
