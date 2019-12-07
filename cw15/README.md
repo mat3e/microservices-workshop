@@ -13,7 +13,7 @@
    - `DELAY_START=10`
 5. Ustawić mapowania portów, np. `8082:8080` - to co w kontenerze jako 8080, u nas 8082
 6. W przypadku serwisu tasków dodać mapowanie `8083-8085:8080`
-7. Nadpisać ustawienie kontenera kafki:
+7. Wewnątrz `docker-compose-apps.yml` nadpisać ustawienie kontenera kafki:
    ```
    kafka:
      environment:
