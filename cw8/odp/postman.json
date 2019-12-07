@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "12d00ee2-920c-4f27-b9f6-2d323dcf373a",
+		"name": "microservices/plans",
+		"description": "Project plan and its milestones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create plan",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"VIP Project\",\n    \"deadline\": 1573466306103,\n    \"projectSteps\": [\n        {\n            \"description\": \"start\",\n            \"daysToProjectDeadline\": -3\n        },\n        {\n            \"description\": \"continue\",\n            \"daysToProjectDeadline\": -1\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/plans",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"plans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create plan wrong body",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deadline\": 1573466306103,\n    \"projectSteps\": [\n        {\n            \"description\": \"start\",\n            \"daysToProjectDeadline\": -3\n        },\n        {\n            \"description\": \"continue\",\n            \"daysToProjectDeadline\": -1\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/plans",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"plans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read plans",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/plans",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"plans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read plans sort",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/plans?sort=name,desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"plans"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "name,desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read plans page, size",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/plans?page=0&size=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"plans"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read plan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/plans/5dd1d371bf94d3056fe4f6f0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"plans",
+						"5dd1d371bf94d3056fe4f6f0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update projectSteps",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"projectSteps\": [\n        {\n            \"description\": \"start\",\n            \"daysToProjectDeadline\": -10\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/plans/5dd1d371bf94d3056fe4f6f0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"plans",
+						"5dd1d371bf94d3056fe4f6f0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update name",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Nice project\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/api/plans/5dd1d46cbf94d3056fe4f6f1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"plans",
+						"5dd1d46cbf94d3056fe4f6f1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crete tasks from plan",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/plans/5dd318dfc63d0739f0d648d2/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"plans",
+						"5dd318dfc63d0739f0d648d2",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
