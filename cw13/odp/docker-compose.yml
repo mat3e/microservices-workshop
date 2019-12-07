@@ -14,5 +14,3 @@ services:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
-    environment:
-      - KAFKA_ADVERTISED_HOST_NAME=zookeeper

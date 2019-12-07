@@ -1,0 +1,35 @@
+version: '3'
+services:
+  kafka:
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+  plans:
+    image: microservices/plans
+    ports:
+      - 8081:8080
+    environment:
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017
+      - DELAY_START=10
+  reports:
+    image: microservices/reports
+    ports:
+      - 8082:8080
+    environment:
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017
+      - DELAY_START=10
+  tasks:
+    image: microservices/tasks
+    ports:
+      - 8083-8085:8080
+    environment:
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017
+      - DELAY_START=10

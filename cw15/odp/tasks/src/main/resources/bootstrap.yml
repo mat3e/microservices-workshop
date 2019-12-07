@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: tasks
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        format: YAML
+      discovery:
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
