@@ -14,5 +14,5 @@
    - `DELAY_START=10`
 5. Ustawić mapowania portów, np. `8082:8080` - to co w kontenerze jako 8080, u nas 8082
 6. W przypadku serwisu tasków dodać mapowanie `8083-8085:8080`
-7. Zatrzymać wszystkie dockery i uruchomić: `docker-compose -f docker-compose-tools.yml -f docker-compose-apps.yml up`. Pod jakim adresem jest usługa tasków?
+7. Zatrzymać wszystkie dockery i uruchomić: `docker-compose -f docker-compose-tools.yml -f docker-compose-apps.yml up -d`. Pod jakim adresem jest usługa tasków?
 8. Zawołać `docker-compose -f docker-compose-tools.yml -f docker-compose-apps.yml up --scale tasks=3 -d`
